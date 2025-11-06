@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/constraintLayout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/UpgradesPanel"
+        android:layout_width="322dp"
+        android:layout_height="650dp"
+        android:background="@drawable/panel_colour_scheme"
+        android:elevation="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ClosePanel"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:alpha="0"
+            android:clickable="true"
+            android:elevation="50dp"
+            android:focusable="true"
+            android:text="CLOSE UPGRADES"
+            android:textSize="25sp"
+            android:textColor="@android:color/transparent"
+            app:backgroundTint="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/ClosePanelIcon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:alpha="1"
+            android:elevation="60dp"
+            android:src="@drawable/close_button"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="19dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Buy1"
+            android:layout_width="282dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="108dp"
+            android:alpha="1"
+            android:clickable="true"
+            android:elevation="50dp"
+            android:focusable="true"
+            android:gravity="start|center_vertical"
+            android:paddingStart="16dp"
+            android:text="Buy 1 Square \n(Cost: 500 units)"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:backgroundTint="#000080"
+            app:cornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Buy2"
+            android:layout_width="282dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="212dp"
+            android:alpha="1"
+            android:clickable="true"
+            android:elevation="50dp"
+            android:focusable="true"
+            android:gravity="start|center_vertical"
+            android:paddingStart="16dp"
+            android:text="Buy 1 Pentagon \n(Cost: 1000 units)"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:backgroundTint="#000080"
+            app:cornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Buy3"
+            android:layout_width="282dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="320dp"
+            android:alpha="1"
+            android:clickable="true"
+            android:elevation="50dp"
+            android:focusable="true"
+            android:gravity="start|center_vertical"
+            android:paddingStart="16dp"
+            android:text="Buy 1 Hexagon \n(Cost: 1500 units)"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:backgroundTint="#000080"
+            app:cornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/BuyIcon3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="332dp"
+            android:layout_marginEnd="28dp"
+            android:alpha="1"
+            android:elevation="60dp"
+            android:src="@drawable/cylinder"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/BuyIcon1"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="28dp"
+            android:alpha="1"
+            android:elevation="60dp"
+            android:src="@drawable/cone"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="SHOP"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/BuyIcon2"
+            android:layout_width="62dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="224dp"
+            android:layout_marginEnd="28dp"
+            android:alpha="1"
+            android:elevation="80dp"
+            android:src="@drawable/pyramid"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ClickingShape"
+        android:layout_width="139dp"
+        android:layout_height="135dp"
+        android:alpha="0.7"
+        android:background="@drawable/cone"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="CLICK ME"
+        android:textColor="#00000000"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402" />
+
+    <TextView
+        android:id="@+id/UPSDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="280dp"
+        android:text="Units Per Second: "
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/PointCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Units: "
+        android:textColor="@color/black"
+        android:textSize="31sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.133" />
+
+    <TextView
+        android:id="@+id/CurrentShape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Shape: "
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.685" />
+
+    <TextView
+        android:id="@+id/SideLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Side Length: "
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.243" />
+
+    <ImageView
+        android:id="@+id/Saving"
+        android:alpha="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="6dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/UpgradesSymbol"
+        android:layout_width="92dp"
+        android:layout_height="186dp"
+        android:alpha="0.5"
+        android:elevation="10dp"
+        android:rotation="-20"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.919"
+        app:srcCompat="@android:drawable/ic_menu_manage" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Upgrades"
+        android:layout_width="161dp"
+        android:layout_height="133dp"
+        android:alpha="0.95"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="UPGRADES"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:backgroundTint="#000080"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.889" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ShopButton"
+        android:layout_width="162dp"
+        android:layout_height="131dp"
+        android:alpha="0.95"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="SHOP"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:visibility="visible"
+        app:backgroundTint="#000080"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.859"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <ImageView
+        android:id="@+id/ShopSymbol"
+        android:layout_width="211dp"
+        android:layout_height="153dp"
+        android:alpha="0.6"
+        android:backgroundTint="@color/white"
+        android:elevation="10dp"
+        android:src="@drawable/shopping_basket"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.897" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
