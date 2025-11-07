@@ -37,7 +37,7 @@ public class Animations {
         bobYDown.setDuration(bobDuration);
 
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(scaleXUp).with(scaleYUp); // Play scaleX and scaleY simultaneously
+        animatorSet.play(scaleXUp).with(scaleYUp);
         animatorSet.play(scaleXDown).with(scaleYDown).after(scaleXUp);
         animatorSet.play(bobXUp).with(bobYUp).after(scaleXDown);
         animatorSet.play(bobXDown).with(bobYDown).after(bobXUp);

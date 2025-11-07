@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 
 public class Util {
 
-    public static final int scaleFactor = 10000;
+    public static final int scaleFactor = 5000;
 
     public static void saveShapeData(SharedPreferences.Editor editor, String shapeName, int quantity, double price, double ups) {
         editor.putInt("number_of_" + shapeName.toLowerCase() + "s", quantity);

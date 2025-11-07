@@ -45,10 +45,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean isPanelOpen = false;
     private boolean isShopOpen = false;
     private boolean isUpgradesOpen = false;
+    private boolean isSettingsOpen = false;
 
     private Util.ShapeType shapeType;
     private TextView sideLengthDisplay, heightDisplay, currentShapeDisplay, pointsDisplay, shop, UPS;
-    private Button upgradesButton, shopButton, shapeClicker, closePanelButton, buy1, buy2, buy3, buy4;
+    private Button upgradesButton, shopButton, shapeClicker, closePanelButton, buy1, buy2, buy3, buy4, settingsButton;
     private ImageView upgradesIcon, shopIcon, buyIcon1, buyIcon2, buyIcon3, buyIcon4;
     private Animations animations;
     private ConstraintLayout upgradesPanel;
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         buyIcon2 = findViewById(R.id.BuyIcon2);
         buyIcon3 = findViewById(R.id.BuyIcon3);
         buyIcon4 = findViewById(R.id.BuyIcon4);
+        settingsButton = findViewById(R.id.Settings);
         shop = findViewById(R.id.Shop);
         UPS = findViewById(R.id.UPSDisplay);
         sideLength = 1;
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         heightDisplay.setGravity(Gravity.CENTER);
         pointsDisplay.setGravity(Gravity.CENTER);
         UPS.setGravity(Gravity.CENTER);
-
 
         loadGameProgress();
         animations = new Animations();
@@ -109,23 +110,31 @@ public class MainActivity extends AppCompatActivity {
 
         upgradesButton.setOnClickListener(v -> {
             if (!isPanelOpen) {
-                openPanel(true, false);
+                openPanel(true, false, false);
                 isUpgradesOpen = true;
             }
         });
 
         closePanelButton.setOnClickListener(v -> {
             if (isPanelOpen) {
-                openPanel(false, false);
+                openPanel(false, false, false);
                 isUpgradesOpen = false;
                 isShopOpen = false;
+                isSettingsOpen = false;
             }
         });
 
         shopButton.setOnClickListener(v -> {
             if (!isPanelOpen) {
-                openPanel(true, true);
+                openPanel(true, true, false);
                 isShopOpen = true;
+            }
+        });
+
+        settingsButton.setOnClickListener(v -> {
+            if (!isPanelOpen) {
+                openPanel(true, false, true);
+                isSettingsOpen = true;
             }
         });
 
@@ -152,18 +161,22 @@ public class MainActivity extends AppCompatActivity {
                     handleShapeUpgradePurchase(Util.ShapeType.PRISM);
                 } else if (!Upgrades.volume && totalUnitsGenerated >= Upgrades.VOLUME_UPGRADE_PRICE) {
                     Upgrades.volume = true;
-                    openPanel(false, false);
+                    openPanel(false, false, false);
                     updateUPSCount();
                     updatePointsDisplay();
                     saveGameProgress();
                 } else if (totalUnitsGenerated >= Upgrades.calculateSideLengthUpgradePrice()) {
-                    sideLength += 1;
+                    sideLength += 10;
                     Upgrades.sideLengthUpgradesPurchased++;
-                    openPanel(false, false);
+                    openPanel(false, false, false);
                     updatePointsDisplay();
                     saveGameProgress();
-
                 }
+            } else if (isSettingsOpen) {
+                openPanel(false, false, false);
+                resetGameProgress();
+                shapeClicker.setBackgroundResource(R.drawable.cone);
+                setShapeSize(shapeClicker, CONE_SIZE_DP, CONE_SIZE_DP);
             }
         });
 
@@ -185,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 if (totalUnitsGenerated >= Upgrades.calculateHeightUpgradePrice()) {
                     height += 10;
                     Upgrades.heightUpgradesPurchased++;
-                    openPanel(false, false);
+                    openPanel(false, false, false);
                     updatePointsDisplay();
                     saveGameProgress();
                 }
@@ -210,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 if (totalUnitsGenerated >= Upgrades.calculateHeightUpgradePrice()) {
                     height += 10;
                     Upgrades.heightUpgradesPurchased++;
-                    openPanel(false, false);
+                    openPanel(false, false, false);
                     updatePointsDisplay();
                     saveGameProgress();
                 }
@@ -271,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
             shapeClicker.setBackgroundResource(R.drawable.prism);
             setShapeSize(shapeClicker, PRISM_SIZE_DP, PRISM_SIZE_DP);
         }
-        openPanel(false, false);
+        openPanel(false, false, false);
         updatePointsDisplay();
         saveGameProgress();
     }
@@ -485,6 +498,7 @@ public class MainActivity extends AppCompatActivity {
         setVisibility(sideLengthDisplay, false);
         setVisibility(heightDisplay, false);
         setVisibility(shopButton, false);
+        setVisibility(settingsButton, false);
         setVisibility(pointsDisplay, false);
         setVisibility(currentShapeDisplay, false);
         setVisibility(shopIcon, false);
@@ -498,6 +512,7 @@ public class MainActivity extends AppCompatActivity {
         setVisibility(sideLengthDisplay, true);
         setVisibility(heightDisplay, true);
         setVisibility(shopButton, true);
+        setVisibility(settingsButton, true);
         setVisibility(pointsDisplay, true);
         setVisibility(currentShapeDisplay, true);
         setVisibility(shopIcon, true);
@@ -506,13 +521,26 @@ public class MainActivity extends AppCompatActivity {
         setVisibility(shapeClicker, true);
     }
 
-    private void openPanel(boolean open, boolean isShop) {
+    private void openPanel(boolean open, boolean isShop, boolean isSettings) {
         if (open) {
             isPanelOpen = true;
             hideMainUI();
             upgradesPanel.setVisibility(LinearLayout.VISIBLE);
 
-            if (isShop) {
+            if (isSettings) {
+                shop.setText("Settings");
+
+                setVisibility(buy1, true);
+                buy1.setText("Wipe Save");
+                setVisibility(buy2, false);
+                setVisibility(buy3, false);
+                setVisibility(buy4, false);
+
+                setVisibility(buyIcon1, false);
+                setVisibility(buyIcon2, false);
+                setVisibility(buyIcon3, false);
+                setVisibility(buyIcon4, false);
+            } else if (isShop) {
                 shop.setText("Shop");
                 setVisibility(buy1, true);
                 buy1.setText("Buy 1 Cone\n(Cost: " + Util.formatNumber(Cone.cone_price) + " units)");
@@ -558,7 +586,7 @@ public class MainActivity extends AppCompatActivity {
                     setVisibility(buy2, true);
                     buy2.setText("Increase Side Length/Radius by 10\n(Cost: " + Upgrades.getFormattedSideLengthPrice() + " units)");
                     setVisibility(buy3, true);
-                    buy3.setText("Increase Height by 1\n(Cost: " + Upgrades.getFormattedHeightPrice() + " units)");
+                    buy3.setText("Increase Height by 10\n(Cost: " + Upgrades.getFormattedHeightPrice() + " units)");
                     setVisibility(buy4, false);
                 } else if (!Upgrades.boughtCylinder) {
                     setVisibility(buy1, true);
@@ -566,7 +594,7 @@ public class MainActivity extends AppCompatActivity {
                     setVisibility(buy2, true);
                     buy2.setText("Increase Side Length/Radius by 10\n(Cost: " + Upgrades.getFormattedSideLengthPrice() + " units)");
                     setVisibility(buy3, true);
-                    buy3.setText("Increase Height by 1\n(Cost: " + Upgrades.getFormattedHeightPrice() + " units)");
+                    buy3.setText("Increase Height by 10\n(Cost: " + Upgrades.getFormattedHeightPrice() + " units)");
                     setVisibility(buy4, false);
                 } else if (!Upgrades.boughtPrism) {
                     setVisibility(buy1, true);
@@ -582,7 +610,7 @@ public class MainActivity extends AppCompatActivity {
                     setVisibility(buy2, true);
                     buy2.setText("Increase Side Length/Radius by 10\n(Cost: " + Upgrades.getFormattedSideLengthPrice() + " units)");
                     setVisibility(buy3, true);
-                    buy3.setText("Increase Height by 1\n(Cost: " + Upgrades.getFormattedHeightPrice() + " units)");
+                    buy3.setText("Increase Height by 10\n(Cost: " + Upgrades.getFormattedHeightPrice() + " units)");
                     setVisibility(buy4, false);
                 } else {
                     setVisibility(buy1, true);
@@ -598,6 +626,7 @@ public class MainActivity extends AppCompatActivity {
             isPanelOpen = false;
             isShopOpen = false;
             isUpgradesOpen = false;
+            isSettingsOpen = false;
             animations.panelSlideAnimation(upgradesPanel, 5, 1800, 600);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 showMainUI();
