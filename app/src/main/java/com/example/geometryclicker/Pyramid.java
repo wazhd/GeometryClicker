@@ -1,11 +1,13 @@
 package com.example.geometryclicker;
 
 public class Pyramid {
-    private static final double PYRAMID_UPS_PER_PURCHASE_SA = calculateSurfaceArea(1, 1);
-    private static final double PYRAMID_UPS_PER_PURCHASE_VOLUME = calculateVolume(1, 1);
-    private static final double BASE_PRICE_MULTIPLIER = 1.5;
-    public static final int INITIAL_PRICE = 150000;
-    public static final int UPGRADE_PRICE = 200000;
+    private static final double PYRAMID_UPS_PER_PURCHASE_SA_BASE = calculateSurfaceArea(1, 1);
+    private static final double PYRAMID_UPS_PER_PURCHASE_SA_HEIGHT = calculateSurfaceArea(1, 1);
+    private static final double PYRAMID_UPS_PER_PURCHASE_VOLUME_BASE = calculateVolume(1, 1);
+    private static final double PYRAMID_UPS_PER_PURCHASE_VOLUME_HEIGHT = calculateVolume(1, 1);
+    private static final double BASE_PRICE_MULTIPLIER = 2.0;
+    public static final double INITIAL_PRICE = calculateSurfaceArea(1, 1) * Util.scaleFactor * 100;
+    public static final int UPGRADE_PRICE = 5000000;
 
     public static int pyramids = 0;
     public static double pyramid_UPS = 0;
@@ -28,32 +30,43 @@ public class Pyramid {
         return (1.0/3.0) * base * base * height;
     }
 
-    public static double buyPyramid(double sideLength, boolean upgradeForVolume) {
+    public static double[] buyPyramid(double base, double height, boolean upgradeForVolume) {
         double currentTotal;
         if (upgradeForVolume) {
-            currentTotal = calculateVolume(sideLength, sideLength);
-            pyramid_UPS += PYRAMID_UPS_PER_PURCHASE_VOLUME;
+            currentTotal = calculateVolume(base, height);
+            pyramid_UPS += PYRAMID_UPS_PER_PURCHASE_VOLUME_BASE + PYRAMID_UPS_PER_PURCHASE_VOLUME_HEIGHT;
         } else {
-            currentTotal = calculateSurfaceArea(sideLength, sideLength);
-            pyramid_UPS += PYRAMID_UPS_PER_PURCHASE_SA;
+            currentTotal = calculateSurfaceArea(base, height);
+            pyramid_UPS += PYRAMID_UPS_PER_PURCHASE_SA_BASE + PYRAMID_UPS_PER_PURCHASE_SA_HEIGHT;
         }
 
         currentTotal -= pyramid_price;
 
-        double newSideLength;
+        double newBase = base + 1;
+        double newHeight = height + 1;
+
         if (upgradeForVolume) {
-            newSideLength = Math.pow(3.0 * currentTotal, 1.0/3.0);
+            double volume = currentTotal;
+            double tempBase = Math.pow((3.0 * volume) / newHeight, 0.5);
+            if (tempBase > newBase) {
+                newBase = tempBase;
+            }
         } else {
-            double a = 2.0;
-            double b = 1.0;
-            double c = -currentTotal;
-            newSideLength = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+            double surfaceArea = currentTotal;
+            double slantHeight = Math.sqrt((newBase / 2.0) * (newBase / 2.0) + newHeight * newHeight);
+            double a = 1.0;
+            double b = Math.sqrt(newHeight * newHeight + 0.25);
+            double c = -surfaceArea;
+            double tempBase = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+            if (tempBase > newBase) {
+                newBase = tempBase;
+            }
         }
 
         pyramids++;
         pyramid_price = calculatePriceFromQuantity(INITIAL_PRICE, pyramids);
 
-        return newSideLength;
+        return new double[]{newBase, newHeight};
     }
 
     public static double calculatePriceFromQuantity(double basePrice, int quantity) {

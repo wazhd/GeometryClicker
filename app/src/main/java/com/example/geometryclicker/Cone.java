@@ -1,10 +1,12 @@
 package com.example.geometryclicker;
 
 public class Cone {
-    private static final double CONE_UPS_PER_PURCHASE_SA = calculateSurfaceArea(1, 1);
-    private static final double CONE_UPS_PER_PURCHASE_VOLUME = calculateVolume(1, 1);
-    private static final double BASE_PRICE_MULTIPLIER = 1.3;
-    public static final int INITIAL_PRICE = 50000;
+    private static final double CONE_UPS_PER_PURCHASE_SA_RADIUS = calculateSurfaceArea(1, 1);
+    private static final double CONE_UPS_PER_PURCHASE_SA_HEIGHT = calculateSurfaceArea(1, 1);
+    private static final double CONE_UPS_PER_PURCHASE_VOLUME_RADIUS = calculateVolume(1, 1);
+    private static final double CONE_UPS_PER_PURCHASE_VOLUME_HEIGHT = calculateVolume(1, 1);
+    private static final double BASE_PRICE_MULTIPLIER = 1.8;
+    public static final double INITIAL_PRICE = calculateSurfaceArea(1, 1) * Util.scaleFactor * 50;
 
     public static int cones = 0;
     public static double cone_UPS = 0;
@@ -23,29 +25,40 @@ public class Cone {
         return (1.0/3.0) * Math.PI * radius * radius * height;
     }
 
-    public static double buyCone(double sideLength, boolean upgradeForVolume) {
+    public static double[] buyCone(double radius, double height, boolean upgradeForVolume) {
         double currentTotal;
         if (upgradeForVolume) {
-            currentTotal = calculateVolume(sideLength, sideLength);
-            cone_UPS += CONE_UPS_PER_PURCHASE_VOLUME;
+            currentTotal = calculateVolume(radius, height);
+            cone_UPS += CONE_UPS_PER_PURCHASE_VOLUME_RADIUS + CONE_UPS_PER_PURCHASE_VOLUME_HEIGHT;
         } else {
-            currentTotal = calculateSurfaceArea(sideLength, sideLength);
-            cone_UPS += CONE_UPS_PER_PURCHASE_SA;
+            currentTotal = calculateSurfaceArea(radius, height);
+            cone_UPS += CONE_UPS_PER_PURCHASE_SA_RADIUS + CONE_UPS_PER_PURCHASE_SA_HEIGHT;
         }
 
         currentTotal -= cone_price;
 
-        double newSideLength;
+        double newRadius = radius + 1;
+        double newHeight = height + 1;
+
         if (upgradeForVolume) {
-            newSideLength = Math.pow((3.0 * currentTotal) / Math.PI, 1.0/3.0);
+            double volume = currentTotal;
+            double tempRadius = Math.pow((3.0 * volume) / (Math.PI * newHeight), 0.5);
+            if (tempRadius > newRadius) {
+                newRadius = tempRadius;
+            }
         } else {
-            newSideLength = Math.sqrt(currentTotal / (Math.PI * (1 + Math.sqrt(2))));
+            double surfaceArea = currentTotal;
+            double slantHeight = Math.sqrt(newRadius * newRadius + newHeight * newHeight);
+            double tempRadius = (-1 + Math.sqrt(1 + 4 * surfaceArea / Math.PI)) / 2;
+            if (tempRadius > newRadius) {
+                newRadius = tempRadius;
+            }
         }
 
         cones++;
         cone_price = calculatePriceFromQuantity(INITIAL_PRICE, cones);
 
-        return newSideLength;
+        return new double[]{newRadius, newHeight};
     }
 
     public static double calculatePriceFromQuantity(double basePrice, int quantity) {

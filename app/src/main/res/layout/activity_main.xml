@@ -110,6 +110,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Buy4"
+            android:layout_width="282dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="420dp"
+            android:alpha="1"
+            android:clickable="true"
+            android:elevation="50dp"
+            android:focusable="true"
+            android:gravity="start|center_vertical"
+            android:paddingStart="16dp"
+            android:text="Buy 1 Prism \n(Cost: 1500 units)"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:backgroundTint="#000080"
+            app:cornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <ImageView
             android:id="@+id/BuyIcon3"
             android:layout_width="70dp"
@@ -124,10 +145,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/BuyIcon4"
+            android:layout_width="99dp"
+            android:layout_height="79dp"
+            android:layout_marginTop="428dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="1"
+            android:elevation="60dp"
+            android:src="@drawable/prism"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/BuyIcon1"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="128dp"
+            android:layout_width="60dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="28dp"
             android:alpha="1"
             android:elevation="60dp"
@@ -185,8 +219,8 @@
         android:id="@+id/UPSDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="280dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="284dp"
         android:text="Units Per Second: "
         android:textColor="@color/black"
         android:textSize="21sp"
@@ -202,10 +236,10 @@
         android:textSize="31sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.133" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <TextView
         android:id="@+id/CurrentShape"
@@ -225,14 +259,29 @@
         android:id="@+id/SideLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Side Length: "
+        android:text="Side Length/Radius: "
         android:textColor="@color/black"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
+        app:layout_constraintVertical_bias="0.221" />
+
+    <TextView
+        android:id="@+id/Height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height: "
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.27" />
 
     <ImageView
         android:id="@+id/Saving"
